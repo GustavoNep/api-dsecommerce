@@ -58,9 +58,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowCredentials(true);
-		config.setAllowedOrigins(Collections.singletonList("*"));
-		config.setAllowedMethods(Arrays.asList("HEAD", "OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH"));
-		config.setAllowedHeaders(Arrays.asList("Authorization", "Location", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin", "Origin", "Accept"));
+		config.addAllowedOrigin("https://ds-commerce-v1.netlify.app");
+		config.addAllowedHeader("*");
+		config.addAllowedMethod("GET");
+		config.addAllowedMethod("PUT");
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
