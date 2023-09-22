@@ -1,6 +1,7 @@
 package com.devsuperior.dscommerce.config;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,14 +53,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		
 		http.cors(Customizer.withDefaults());
 	}
-
 	@Bean
 	public CorsFilter corsFilter() {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		CorsConfiguration config = new CorsConfiguration();
-		config.addAllowedOrigin("*");
+		config.setAllowedOrigins(Collections.singletonList("*"));
 		config.setAllowedMethods(Arrays.asList("HEAD", "OPTIONS", "GET", "POST", "PUT", "DELETE", "PATCH"));
-		config.setAllowedHeaders(Arrays.asList("Authorization", "Location", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin"));
+		config.setAllowedHeaders(Arrays.asList("Authorization", "Location", "Cache-Control", "Content-Type", "Access-Control-Allow-Origin", "Origin", "Accept"));
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
